@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Form</title>
+  <style>
+    .profilethatshii{
+      background-color: #99c2ff;
+    }
+    .pfcontainer {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 10px;
+      background-color: #99c2ff;
+      color:#0047b3;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+      color:#0047b3;
+      font-size: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color:#0047b3;
+    }
+
+    #imagePreview {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    #imagePreview img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+
+    .remove-image {
+      color: #991f00;
+      cursor: pointer;
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      background-color: #cce0ff;
+      color: #0047b3;
+      font-weight: bold;
+      font-size: 15px;
+      border-color: #cce0ff;
+    }
+  </style>
+</head>
+<body class="profilethatshii">
+  <div class="pfcontainer">
+    <h2>Product Form</h2>
+    <form id="productForm" onsubmit="saveProduct(event)">
+      <label for="productName">Product Name:</label>
+      <input style="background-color:#cce0ff; border-color: #cce0ff;" type="text" id="productName" required>
+      
+      <label for="employeeId">Employee ID:</label>
+      <input style="background-color:#cce0ff; border-color: #cce0ff;" type="text" id="employeeId" required>
+
+      <label for="description">Description:</label>
+      <textarea style="background-color:#cce0ff; border-color: #cce0ff;" id="description" required></textarea>
+
+      <label for="price">Price:</label>
+      <input style="background-color:#cce0ff; border-color: #cce0ff;" style="background-color:#cce0ff; border-color: #cce0ff;" type="number" id="price" required>
+
+      <label for="quantity">Quantity:</label>
+      <input style="background-color:#cce0ff; border-color: #cce0ff;" type="number" id="quantity" required>
+
+      <label for="imageInput">Upload Images:</label>
+      <input style="font-size: 15px;font-weight: bold;" type="file" id="imageInput" accept="image/*" multiple>
+      
+      <div id="imagePreview"></div>
+
+      <button type="submit">Save</button>
+    </form>
+    <br>
+    <a href="project.html" style="font-size: 20px;font-weight: bold;color: #0047b3;text-align: center;">Go back to main page</a>
+  </div>
+  
+  <script>
+    function saveProduct(event) {
+      event.preventDefault();
+
+      const productName = document.getElementById("productName").value;
+      const employeeId = document.getElementById("employeeId").value;
+      const description = document.getElementById("description").value;
+      const price = document.getElementById("price").value;
+      const quantity = document.getElementById("quantity").value;
+
+      const images = [];
+      const imageInput = document.getElementById("imageInput");
+      for (let i = 0; i < imageInput.files.length; i++) {
+        const file = imageInput.files[i];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          images.push(e.target.result);
+          if (images.length === imageInput.files.length) {
+            saveProductData(productName, employeeId, description, price, quantity, images);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function saveProductData(productName, employeeId, description, price, quantity, images) {
+      const productData = {
+        productName,
+        employeeId,
+        description,
+        price,
+        quantity,
+        images
+      };
+
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      products.push(productData);
+      localStorage.setItem("products", JSON.stringify(products));
+
+      window.location.href = "project.html";
+    }
+
+    function showImagePreview() {
+      const imagePreview = document.getElementById("imagePreview");
+      imagePreview.innerHTML = "";
+
+      const imageInput = document.getElementById("imageInput");
+      for (let i = 0; i < imageInput.files.length; i++) {
+        const file = imageInput.files[i];
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.alt = "Image Preview";
+
+        const removeBtn = document.createElement("span");
+        removeBtn.className = "remove-image";
+        removeBtn.innerHTML = "&#10006;";
+        removeBtn.addEventListener("click", function() {
+          imagePreview.removeChild(img);
+          imagePreview.removeChild(removeBtn);
+        });
+
+        imagePreview.appendChild(img);
+        imagePreview.appendChild(removeBtn);
+      }
+    }
+
+    document.getElementById("imageInput").addEventListener("change", showImagePreview);
+  </script>
+</body>
+</html>

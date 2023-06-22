@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+      <title>Add Information</title>
+      <link rel="stylesheet" href="project.css">
+      <style>
+        
+      </style>
+    </head>
+    <body class="newshi">
+      <h1>Add Information</h1>
+    
+      <form id="infoForm">
+        <label for="name">ENTER INFORMATION:</label>
+        <input type="text" id="name" required placeholder="type here...">
+        <br><br><br>
+        <button type="submit" id="goforit">Submit</button>
+        <br><br><br>
+        <a href="project.html"> Go back to main page</a>
+      </form>
+    
+      <script>
+        document.getElementById('infoForm').addEventListener('submit', function(e) {
+          e.preventDefault(); // Prevent form submission
+          
+          // Get the values from the input fields
+          var name = document.getElementById('name').value;
+
+          // Get the existing array from localStorage or create a new one
+          var infoArray = JSON.parse(localStorage.getItem('infoArray')) || [];
+          
+          // Add the new information to the array
+          infoArray.push({ name: name });
+          
+          // Store the updated array in localStorage
+          localStorage.setItem('infoArray', JSON.stringify(infoArray));
+          
+          // Redirect to the other page
+          window.location.href = 'project.html';
+        });
+      </script>
+    </body>
+    </html>
+    
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

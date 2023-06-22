@@ -1,0 +1,40 @@
+.faq {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color:#cce0ff;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .question {
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 50px;
+    position: relative;
+    color: #003d99;
+    
+  }
+  
+  .question-icon {
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform-origin: center;
+    color: #003d99;
+  }
+  
+  .active .question-icon {
+    transform: rotate(90deg);
+  }
+  
+  .answer {
+    display: none;
+    padding-left: 20px;
+  }

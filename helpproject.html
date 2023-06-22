@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <a href="project.html" style="color:#003d99;font-weight: bold;font-size: 20px;">Home</a>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Page</title>
+  <link rel="stylesheet" href="helpcss.css">
+</head>
+<body class="faq">
+  <h1 style="color:#003d99">Frequently Asked Questions</h1>
+
+  <div class="question">
+    <span>What is the purpose of this FAQ page?</span>
+    <div class="question-icon">▶</div>
+    <div class="answer">
+      <p>The purpose of this FAQ page is to provide answers to commonly asked questions about our product/service.</p>
+    </div>
+  </div>
+
+  <div class="question">
+    <span>How do I get started?</span>
+    <div class="question-icon">▶</div>
+    <div class="answer">
+      <p>To get started, follow these steps: 
+        <ul>
+            <li>Make an acc</li>
+            <li>Go to the contact section</li>
+            <li>Reach out for help</li>
+
+        </ul>
+      </p>
+    </div>
+  </div>
+
+  <div class="question">
+    <span>Can I request a refund?</span>
+    <div class="question-icon">▶</div>
+    <div class="answer">
+      <p>Yes, you can request a refund within 30 days of purchase. Please contact our support team for assistance.</p>
+    </div>
+  </div>
+
+  <!-- Add more questions and answers as needed -->
+  <script>const questions = document.querySelectorAll('.question');
+
+    questions.forEach(question => {
+      const questionIcon = question.querySelector('.question-icon');
+      const answer = question.querySelector('.answer');
+
+      questionIcon.addEventListener('click', () => {
+        question.classList.toggle('active');
+        answer.style.display = question.classList.contains('active') ? 'block' : 'none';
+      });
+    });
+    </script>
+    
+  </script>
+</body>
+</html>
